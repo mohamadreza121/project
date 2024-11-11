@@ -1,0 +1,64 @@
+<%- include('../partials/_header') %>
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Edit <%= type === 'hero' ? 'Hero' : 'Item' %></h1>
+  
+  <form action="/<%= type === 'hero' ? 'heroes' : 'items' %>/edit/<%= data._id %>" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label"><%= type === 'hero' ? 'Hero Name' : 'Item Name' %></label>
+      <input type="text" class="form-control" id="name" name="name" value="<%= data.name %>" required>
+    </div>
+
+    <% if (type === 'hero') { %>
+      <!-- Hero-specific fields -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <input type="text" class="form-control" id="role" name="role" value="<%= data.role %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="abilities" class="form-label">Abilities (comma-separated)</label>
+        <input type="text" class="form-control" id="abilities" name="abilities" value="<%= data.abilities.join(', ') %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required><%= data.description %></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="aliases" class="form-label">Aliases (comma-separated)</label>
+        <input type="text" class="form-control" id="aliases" name="aliases" value="<%= data.aliases ? data.aliases.join(', ') : '' %>">
+      </div>
+
+      <div class="mb-3">
+        <label for="lore" class="form-label">Lore</label>
+        <textarea class="form-control" id="lore" name="lore" rows="3"><%= data.lore %></textarea>
+      </div>
+
+    <% } else { %>
+      <!-- Item-specific fields -->
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" class="form-control" id="type" name="type" value="<%= data.type %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="cost" class="form-label">Cost</label>
+        <input type="number" class="form-control" id="cost" name="cost" value="<%= data.cost %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required><%= data.description %></textarea>
+      </div>
+    <% } %>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+      <a href="/<%= type === 'hero' ? 'heroes' : 'items' %>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/_footer') %>

@@ -1,0 +1,64 @@
+<%- include('../partials/_header') %>
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Add New <%= type === 'hero' ? 'Hero' : 'Item' %></h1>
+  
+  <form action="/<%= type === 'hero' ? 'heroes' : 'items' %>/add" method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label"><%= type === 'hero' ? 'Hero Name' : 'Item Name' %></label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Enter the <%= type === 'hero' ? 'hero' : 'item' %>'s name" required>
+    </div>
+
+    <% if (type === 'hero') { %>
+      <!-- Hero-specific fields -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <input type="text" class="form-control" id="role" name="role" placeholder="Enter the hero's role (e.g., Support, Carry)" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="abilities" class="form-label">Abilities (comma-separated)</label>
+        <input type="text" class="form-control" id="abilities" name="abilities" placeholder="Enter abilities separated by commas" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a description of the hero" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="aliases" class="form-label">Aliases (comma-separated)</label>
+        <input type="text" class="form-control" id="aliases" name="aliases" placeholder="Enter aliases separated by commas">
+      </div>
+
+      <div class="mb-3">
+        <label for="lore" class="form-label">Lore</label>
+        <textarea class="form-control" id="lore" name="lore" rows="3" placeholder="Enter the hero's lore"></textarea>
+      </div>
+
+    <% } else { %>
+      <!-- Item-specific fields -->
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" class="form-control" id="type" name="type" placeholder="Enter the item's type (e.g., Weapon, Armor)" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="cost" class="form-label">Cost</label>
+        <input type="number" class="form-control" id="cost" name="cost" placeholder="Enter the item's cost" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a description of the item" required></textarea>
+      </div>
+    <% } %>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Submit</button>
+      <a href="/<%= type === 'hero' ? 'heroes' : 'items' %>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/_footer') %>

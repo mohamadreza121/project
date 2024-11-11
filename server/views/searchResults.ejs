@@ -1,0 +1,52 @@
+<%- include('partials/_header') %>
+
+<div class="container my-5">
+  <h1 class="text-center mb-4"><%= title %></h1>
+
+  <% if (heroes && items) { %>
+    <% if (heroes.length === 0 && items.length === 0) { %>
+      <p class="text-center">No results found for "<%= query %>".</p>
+    <% } else { %>
+      <% if (heroes.length > 0) { %>
+        <h3>Heroes</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+          <% heroes.forEach(hero => { %>
+            <div class="col">
+              <div class="card h-100">
+                <a href="/heroes/<%= hero._id %>">
+                  <img src="/images/<%= hero.name.toLowerCase() %>.jpg" class="card-img-top" alt="<%= hero.name %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= hero.name %></h5>
+                    <p class="card-text"><i class="fas fa-info-circle"></i> View Details</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+
+      <% if (items.length > 0) { %>
+        <h3 class="mt-5">Items</h3>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <% items.forEach(item => { %>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text"><strong>Type:</strong> <%= item.type %></p>
+                  <p class="card-text"><strong>Cost:</strong> <%= item.cost %></p>
+                  <p class="card-text"><%= item.description %></p>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    <% } %>
+  <% } else { %>
+    <p class="text-center">An error occurred while processing your request.</p>
+  <% } %>
+</div>
+
+<%- include('partials/_footer') %>
